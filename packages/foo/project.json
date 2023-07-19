@@ -1,0 +1,88 @@
+{
+  "name": "foo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/foo/src",
+  "prefix": "myorg",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "packages/foo/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/foo/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/foo/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/foo/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/foo/**/*.ts", "packages/foo/**/*.html"]
+      }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "packages/foo/.storybook",
+        "browserTarget": "foo:build-storybook",
+        "compodoc": true
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/foo",
+        "configDir": "packages/foo/.storybook",
+        "browserTarget": "foo:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "foo:build-storybook",
+        "staticFilePath": "dist/storybook/foo"
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "foo:build-storybook:ci"
+        }
+      }
+    }
+  }
+}

@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@my-org/foo": ["packages/foo/src/index.ts"],
+      "@myorg/foo": ["packages/foo/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
