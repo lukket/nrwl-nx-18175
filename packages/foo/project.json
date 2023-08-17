@@ -40,7 +40,11 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/foo/**/*.ts", "packages/foo/**/*.html"]
+        "lintFilePatterns": [
+          "packages/foo/**/*.ts",
+          "packages/foo/**/*.html",
+          "packages/foo/package.json"
+        ]
       }
     },
     "storybook": {
