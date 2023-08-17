@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@my-org/bar": ["packages/bar/src/index.ts"],
       "@my-org/foo": ["packages/foo/src/index.ts"],
       "@myorg/foo": ["packages/foo/src/index.ts"]
     }

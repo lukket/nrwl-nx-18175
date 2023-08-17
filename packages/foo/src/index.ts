@@ -1,1 +1,1 @@
-export * from './lib/foo.module';
+export { BarComponent } from './lib/bar/bar.component';
